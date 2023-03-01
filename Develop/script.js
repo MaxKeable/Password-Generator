@@ -2,6 +2,19 @@
 var generateBtn = document.querySelector("#generate");
 var passwordText = document.getElementById("password");
 var passwordfinal = [];
+var uppercaseString = "ABCDEFGHIJKLMNOPQRSTUVWX";
+var uppercaseArray = uppercaseString.split("");
+
+var lowercaseString = "abcdefghijklmnopqrstuvwx";
+var lowercaseArray = lowercaseString.split("");
+
+var numberString = "1234567890";
+var numberArray = numberString.split("");
+
+var specialString = "!@#$%^&*()?_-";
+var specialArray = specialString.split("");
+var characterCombine = lowercaseArray;
+
 
 
 // function generatePassword() {
@@ -12,7 +25,7 @@ var passwordfinal = [];
     "How long do you want your password? (Between 8 and 128)"
   );
   var caseStore = window.confirm(
-    "Do you want upper and lowercase characters (Ok for yes, cancel for no)"
+    "Do you want to include uppercase characters (Ok for yes, cancel for no)"
   );
   var numbersStore = window.confirm(
     "Do you want numbers in your password? (Ok for yes, cancel for no)"
@@ -20,44 +33,55 @@ var passwordfinal = [];
   var specialYN = null; 
   var caseYN = null; 
   var numberYN = null; 
-  
- 
-  var uppercaseString = "ABCDEFGHIJKLMNOPQRSTUVWX";
-  var uppercaseArray = uppercaseString.split("");
 
-  var lowercaseString = "abcdefghijklmnopqrstuvwx";
-  var lowercaseArray = lowercaseString.split("");
-
-  var numberString = "1234567890";
-  var numberArray = numberString.split("");
-
-  var specialString = "!@#$%^&*()?_-";
-  var specialArray = specialString.split("");
 
 
 
 
   function generate(sizeStore, specialStore, caseStore, numbersStore) {
-    var charCodes = lowercaseCharCodes;
-    if (specialYN) {
-      charCodes = charCodes.concat(specialCharCodes);
+    if (specialStore) {
+      characterCombine = lowercaseArray.concat(specialArray);
     }
-    if (caseYN) {
-      charcodes = charCodes.concat(uppercaseCharCodes);
-    }
-    if (numberYN) {
-      charCodes = charCodes.concat(numberCharCodes);
-    }
-    console.log(uppercaseLetters);
+    // if (caseYN) {
+    //   charcodes = charCodes.concat(uppercaseCharCodes);
+    // }
+    // if (numberYN) {
+    //   charCodes = charCodes.concat(numberCharCodes);
+    // }
+    // console.log(uppercaseLetters);
 
-    for (var i = 0; i < sizeStore; i++) {
-      var characterCode = charCodes[Math.floor(Math.random() * sizeStore)];
-      passwordfinal.push(string.fromCharCode(characterCode));
-      passwordText.textContent = passwordfinal;
-      console.log("THIS IS THE PASSWORD SO FAR",passwordfinal)
-    }
+
+    // for (var i = 0; i < sizeStore; i++) {
+    //   var selectingNumber = charCodes[Math.floor(Math.random() * sizeStore)];
+    // }
   }
 
+
+  if (specialStore) {
+  characterCombine = characterCombine.concat(specialArray);
+} else if (specialStore === false){
+  characterCombine = characterCombine;
+};
+
+if (caseStore) {
+  characterCombine = characterCombine.concat(uppercaseArray);
+} else if (caseStore === false){
+  characterCombine = characterCombine;
+};
+
+if (numbersStore) {
+  characterCombine = characterCombine.concat(numberArray);
+} else if (numbersStore === false){
+  characterCombine = characterCombine;
+};
+
+for (var i = 0; i < sizeStore; i++) {
+  var selectingNumber = characterCombine[Math.floor(Math.random() * sizeStore)];
+  passwordfinal.push(selectingNumber);
+}
+
+var passwordDisplay = passwordfinal.join("");
+console.log(passwordDisplay);
 
   // Prompt the user for the password critera -> password length between 8 and 128
   // lowercase, uppercase, numbers, special characters
