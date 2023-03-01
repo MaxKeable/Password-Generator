@@ -1,98 +1,61 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+var passwordText = document.getElementById("password");
+var passwordfinal = [];
 
-function generatePassword() {
-  var specialStore = window.prompt(
-    "Do you want your password to include special characters?",
-    "Yes"
+
+// function generatePassword() {
+  var specialStore = window.confirm(
+    "Do you want your password to include special characters? (Ok for yes, cancel for no)"
   );
   var sizeStore = window.prompt(
-    "How long do you want your password? (Min 8 characters Max 128)",
-    "Example: 8"
+    "How long do you want your password? (Between 8 and 128)"
   );
-  var caseStore = window.prompt(
-    "Do you want upper and lowercase characters",
-    "Yes/No"
+  var caseStore = window.confirm(
+    "Do you want upper and lowercase characters (Ok for yes, cancel for no)"
   );
-  var numbersStore = window.prompt(
-    "Do you want numbers in your password?",
-    "Yes/No"
+  var numbersStore = window.confirm(
+    "Do you want numbers in your password? (Ok for yes, cancel for no)"
   );
+  var specialYN = null; 
+  var caseYN = null; 
+  var numberYN = null; 
+  
+ 
+  var uppercaseString = "ABCDEFGHIJKLMNOPQRSTUVWX";
+  var uppercaseArray = uppercaseString.split("");
 
-  if (
-    specialStore === "Yes" ||
-    specialStore === "yes" ||
-    specialStore === "YES"
-  ) {
-    var specialYN = true;
-  } else if (
-    specialStore === "no" ||
-    specialStore === "No" ||
-    specialStore === "NO" ||
-    specialStore == null
-  ) {
-    special = false;
-  }
+  var lowercaseString = "abcdefghijklmnopqrstuvwx";
+  var lowercaseArray = lowercaseString.split("");
 
-  if (caseStore === "Yes" || caseStore === "yes" || caseStore === "YES") {
-    var caseYN = true;
-  } else if (
-    caseStore === "no" ||
-    caseStore === "No" ||
-    caseStore === "NO" ||
-    caseStore == null
-  ) {
-    caseYN = false;
-  }
+  var numberString = "1234567890";
+  var numberArray = numberString.split("");
 
-  if (
-    numbersStore === "Yes" ||
-    numbersStore === "yes" ||
-    numbersStore === "YES"
-  ) {
-    var numberYN = true;
-  } else if (
-    numbersStore === "no" ||
-    numbersStore === "No" ||
-    numbersStore === "NO" ||
-    numbersStore == null
-  ) {
-    numberYN = false;
-  }
+  var specialString = "!@#$%^&*()?_-";
+  var specialArray = specialString.split("");
 
-  var uppercaseCharCodes = arrayLowToHigh(65, 90);
-  var lowercaseCharCodes = arrayLowToHigh(97, 122);
-  var numberCharCodes = arrayLowToHigh(48, 57);
-  var specialCharCodes = arrayLowToHigh(33, 47)
-    .concat(arrayLowToHigh(58, 64))
-    .concat(arrayLowToHigh(91, 96))
-    .concat(arrayLowToHigh(123, 126));
+
+
 
   function generate(sizeStore, specialStore, caseStore, numbersStore) {
     var charCodes = lowercaseCharCodes;
     if (specialYN) {
-      charCodes = charcodes.concat(specialCharCodes);
+      charCodes = charCodes.concat(specialCharCodes);
     }
     if (caseYN) {
-      charcodes = charcodes.concat(uppercaseCharCodes);
+      charcodes = charCodes.concat(uppercaseCharCodes);
     }
     if (numberYN) {
-      charCodes = charcodes.concat(numberCharCodes);
+      charCodes = charCodes.concat(numberCharCodes);
     }
+    console.log(uppercaseLetters);
 
-    var passwordfinal = [];
     for (var i = 0; i < sizeStore; i++) {
       var characterCode = charCodes[Math.floor(Math.random() * sizeStore)];
       passwordfinal.push(string.fromCharCode(characterCode));
+      passwordText.textContent = passwordfinal;
+      console.log("THIS IS THE PASSWORD SO FAR",passwordfinal)
     }
-  }
-
-  function arrayLowToHigh(low, high) {
-    var array = [];
-    for (var i = low; i <= high; i++) {
-      array.push(i);
-    }
-    return array;
   }
 
 
@@ -101,7 +64,7 @@ function generatePassword() {
   // 2. validate the input. ->
   // 3. Generate password with criteria.
   //  Display the password to the page.
-}
+// }
 
 // Write password to the #password input
 function writePassword() {
@@ -109,6 +72,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+  console.log("I'M HERE!!!")
 }
 
 // Add event listener to generate button
