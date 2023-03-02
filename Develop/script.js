@@ -1,10 +1,11 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var passwordText = document.getElementById("password");
+var passwordText = document.getElementById("#password");
 
 
 
 function generatePassword() {
+
 var passwordfinal = [];
 var uppercaseString = "ABCDEFGHIJKLMNOPQRSTUVWX";
 var uppercaseArray = uppercaseString.split("");
@@ -25,6 +26,16 @@ var specialStore = window.confirm(
   var sizeStore = window.prompt(
     "How long do you want your password? (Between 8 and 128)"
   );
+
+  if (sizeStore < 8 || sizeStore > 128) {
+    window.alert("Oops... please choose a number between 0 and 128")
+    sizeStore = window.prompt(
+      "How long do you want your password? (Between 8 and 128)"
+    )
+  } else if (sizeStore >= 8 && sizeStore <= 128) {
+    
+  };
+
   var caseStore = window.confirm(
     "Do you want to include uppercase characters (Ok for yes, cancel for no)"
   );
@@ -35,30 +46,37 @@ var specialStore = window.confirm(
 
   if (specialStore) {
   characterCombine = characterCombine.concat(specialArray);
+  console.log(characterCombine);
 } else if (specialStore === false){
   characterCombine = characterCombine;
 };
 
+
 if (caseStore) {
   characterCombine = characterCombine.concat(uppercaseArray);
+  console.log(characterCombine);
 } else if (caseStore === false){
   characterCombine = characterCombine;
 };
 
 if (numbersStore) {
   characterCombine = characterCombine.concat(numberArray);
+  console.log(characterCombine);
 } else if (numbersStore === false){
   characterCombine = characterCombine;
 };
 
 for (var i = 0; i < sizeStore; i++) {
-  var selectingNumber = characterCombine[Math.floor(Math.random() * sizeStore)];
+  var selectingNumber = characterCombine[Math.floor(Math.random() * characterCombine.length)];
   passwordfinal.push(selectingNumber);
 }
 
+console.log(passwordfinal);
+console.log(sizeStore);
+
 var passwordDisplay = passwordfinal.join("");
-passwordText.textContent = passwordDisplay;
 console.log(passwordDisplay);
+document.querySelector("#password").textContent = passwordDisplay;
 
   // Prompt the user for the password critera -> password length between 8 and 128
   // lowercase, uppercase, numbers, special characters
